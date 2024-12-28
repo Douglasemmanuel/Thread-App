@@ -3,9 +3,14 @@ import * as React from 'react'
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 import Lottie from 'lottie-react-native';
-
+import { createRandomUser } from '../../utils/generate-dummy-data'
+import { ThreadsContext } from '../../context/thread-context'
+import ThreadsItem from '../../components/Threadsitem';
+// const user = createRandomUser();
+// console.log( JSON.stringify(user , null , 2))
 export default function TabOneScreen() {
   const animationRef = React.useRef<Lottie>(null)
+  const threads = React.useContext(ThreadsContext)
   return (
     <SafeAreaView>
         <ScrollView
@@ -30,6 +35,10 @@ export default function TabOneScreen() {
             style={{width:90 , height:90 , alignSelf: 'center'}}
             // onAnimationFinish={()=>{alert("finished")}}
           />
+          {/* <ThreadsItem  /> */}
+          {threads.map((thread)=>(
+          <ThreadsItem key={thread.id} {...thread}/>
+          ))}
         </ScrollView>
     </SafeAreaView>
     
